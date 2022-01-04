@@ -1,0 +1,28 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: managed-cert
+  namespace: test
+spec:
+  domains:
+    - api.josh.cts-gcp.com
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api
+  namespace: test
+  annotations:
+    networking.gke.io/managed-certificates: managed-cert
+spec:
+  rules:
+  - host: api.josh.cts-gcp.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: api
+            port:
+              number: 8080
+        path: /*
+        pathType: ImplementationSpecific
