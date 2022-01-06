@@ -48,7 +48,7 @@ jobs:
         golint .
 
     - id: auth
-      uses: google-github-actions/auth@master
+      uses: google-github-actions/auth@main
       with:
         workload_identity_provider: 'projects/406810047214/locations/global/workloadIdentityPools/test/providers/test'
         service_account: 'azure-ex@azure-auth-335808.iam.gserviceaccount.com'
