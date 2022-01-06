@@ -46,6 +46,7 @@ func main() {
 	}
 	request.Header.Add("Accept", "application/json")
 
+	log.Println("Make request without authentication")
 	client := &http.Client{
 		CheckRedirect: func(req *http.Request, via []*http.Request) error {
 			return http.ErrUseLastResponse
@@ -63,6 +64,8 @@ func main() {
 	}
 	fmt.Printf("%s\n\n", body)
 
+	log.Println("Make request with authentication")
+	request.Header.Del("Accept")
 	if err = makeIAPRequest(os.Stdout, request); err != nil {
 		log.Fatal(err)
 	}
